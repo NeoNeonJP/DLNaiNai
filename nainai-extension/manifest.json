@@ -1,0 +1,13 @@
+{
+    "name": "DLNaiNai",
+    "description": "DLSiteで画像の非表示設定対象になった作品を表示させない。",
+    "version": "0.1.0",
+    "manifest_version": 3,
+    "content_scripts": [
+        {
+            "matches": ["https://www.dlsite.com/*/"],
+            "js": ["nainai-script.js"],
+            "css": ["nainai-style.css"]
+        }
+    ]
+}
