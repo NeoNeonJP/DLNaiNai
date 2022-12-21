@@ -1,7 +1,21 @@
+//非表示にする作品の目印となるクラス
+let invisibleClasses = [
+    "_filter",
+    "_censored"
+];
+
+//ページ読込時点で生成されている要素に対して非表示処理
+invisibleClasses.forEach((c) => {
+    var elements = document.getElementsByClassName(c);
+    for(var i = 0;i < elements.length;i++){
+        hideWorklistItem(elements[i]);
+    }
+})
+
+
 //DOMの監視
 var nainaiObserver = new MutationObserver(function(mutationList, observer){
-    //非表示設定した画像には"_filter"クラスが付くので、クラスが付いた要素が追加されたら処理する。
-    mutationList.filter(m => m.target.classList.contains("_filter")).forEach(m => hideWorklistItem(m.target));
+    mutationList.filter(m => invisibleClasses.some(c => m.target.classList.contains(c))).forEach(m => hideWorklistItem(m.target));
 })
 nainaiObserver.observe(document.getElementById("main_inner"),{
     "subtree": true,
